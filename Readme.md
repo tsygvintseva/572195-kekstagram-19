@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Елизавета Цыгвинцева](https://up.htmlacademy.ru/javascript/19/user/572195).
-* Наставник: `Неизвестно`.
+* Наставник: [Саша Джинн](https://up.htmlacademy.ru/javascript/19/user/354189).
 
 ---
 

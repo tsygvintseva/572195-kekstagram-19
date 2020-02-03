@@ -20,12 +20,13 @@ var AUTHORS_NAMES = ['Антон', 'Андрей', 'Екатерина', 'Вла
 
 var pictureElement = document.querySelector('.pictures');
 var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+document.querySelector('.pictures__title').classList.remove('visually-hidden');
 
 var getRandomValue = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-var array = [];
+var photoArray = [];
 
 var getComment = function () {
   var comment = {
@@ -36,7 +37,7 @@ var getComment = function () {
   return comment;
 };
 
-var makeComments = function () {
+var getComments = function () {
   var commentsArray = [];
   var comments = getRandomValue(MIN_COMMENTS_QUANTITY, MAX_COMMENTS_QUANTITY);
   for (var i = 1; i <= comments; i++) {
@@ -45,37 +46,35 @@ var makeComments = function () {
   return commentsArray;
 };
 
-var makeObj = function (index) {
-  return {
-    url: 'photos/' + index + '.jpg',
-    likes: getRandomValue(LIKES_MIN, LIKES_MAX),
-    сomments: makeComments(),
-    description: DESCRIPTION[getRandomValue(0, DESCRIPTION.length - 1)],
-  };
-};
-
-var makeData = function () {
+var getElement = function () {
   for (var i = 1; i <= QUANTITY_PHOTOS; i++) {
-    array.push(makeObj(i));
+    photoArray.push(
+    {
+      url: 'photos/' + i + '.jpg',
+      likes: getRandomValue(LIKES_MIN, LIKES_MAX),
+      comments: getComments(),
+      description: DESCRIPTION[getRandomValue(0, DESCRIPTION.length - 1)],
+    });
   }
 };
 
 var fragment = document.createDocumentFragment();
 
-var makePicture = function (picture) {
+var getPicture = function (picture) {
   var newPicture = pictureTemplate.cloneNode(true);
   newPicture.querySelector('.picture__img').src = picture.url;
-  newPicture.querySelector('.picture__comments').textContent = picture.comments;
+  newPicture.querySelector('.picture__comments').textContent = picture.comments.length;
   newPicture.querySelector('.picture__likes').textContent = picture.likes;
   return newPicture;
 };
 
 var renderPictures = function () {
-  for (var i = 0; i < array.length; i++) {
-    fragment.appendChild(makePicture(array[i]));
+  for (var i = 0; i < photoArray.length; i++) {
+    fragment.appendChild(getPicture(photoArray[i]));
   }
   pictureElement.appendChild(fragment);
 };
 
-makeData();
+getElement();
 renderPictures();
+console.log(photoArray);

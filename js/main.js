@@ -37,7 +37,6 @@ var getComment = function () {
   return comment;
 };
 
-
 var getComments = function () {
   var commentsArray = [];
   var comments = getRandomValue(MIN_COMMENTS_QUANTITY, MAX_COMMENTS_QUANTITY);
@@ -79,10 +78,12 @@ var renderPictures = function () {
 createPictures();
 renderPictures();
 console.log(pictures);
+
 // module3-task3
 
 var bigPicture = document.querySelector('.big-picture');
 var bigPictureComment = bigPicture.querySelector('.social__comment');
+var bigPictureComments = bigPicture.querySelector('.social__comments');
 
 bigPicture.classList.remove('hidden');
 
@@ -93,12 +94,20 @@ bigPicture.querySelector('.comments-loader').classList.add('hidden');
 // Убрать скролл на контейнере с фотографиями позади
 document.querySelector('body').classList.add('modal-open');
 
+var createComments = function (photo) {
+  for (var i = 0; i < photo.comments.length; i++) {
+    fragment.appendChild(renderComment(photo.comments[i]));
+  }
+  bigPictureComments.appendChild(fragment);
+};
+
 // Заполняю фотографию информацией
 var getBigPicture = function (photo) {
   bigPicture.querySelector('.big-picture__img > img').src = photo.url;
   bigPicture.querySelector('.comments-count').textContent = photo.comments.length;
   bigPicture.querySelector('.likes-count').textContent = photo.likes;
   bigPicture.querySelector('.social__caption').textContent = photo.description;
+  createComments(photo);
 };
 
 // Заполняю cписок комментариев под фотографией
@@ -107,8 +116,7 @@ var renderComment = function (item) {
   newComment.querySelector('.social__picture').src = item.avatar;
   newComment.querySelector('.social__picture').alt = item.name;
   newComment.querySelector('.social__text').textContent = item.message;
+  return newComment;
 };
 
-
 getBigPicture(pictures[0]);
-renderComment();

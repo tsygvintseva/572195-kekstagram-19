@@ -26,7 +26,7 @@ var getRandomValue = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-var photoArray = [];
+var pictures = [];
 
 var getComment = function () {
   var comment = {
@@ -46,15 +46,15 @@ var getComments = function () {
   return commentsArray;
 };
 
-var getElement = function () {
+var createPictures = function () {
   for (var i = 1; i <= QUANTITY_PHOTOS; i++) {
-    photoArray.push(
-    {
-      url: 'photos/' + i + '.jpg',
-      likes: getRandomValue(LIKES_MIN, LIKES_MAX),
-      comments: getComments(),
-      description: DESCRIPTION[getRandomValue(0, DESCRIPTION.length - 1)],
-    });
+    pictures.push(
+        {
+          url: 'photos/' + i + '.jpg',
+          likes: getRandomValue(LIKES_MIN, LIKES_MAX),
+          comments: getComments(),
+          description: DESCRIPTION[getRandomValue(0, DESCRIPTION.length - 1)],
+        });
   }
 };
 
@@ -69,12 +69,54 @@ var getPicture = function (picture) {
 };
 
 var renderPictures = function () {
-  for (var i = 0; i < photoArray.length; i++) {
-    fragment.appendChild(getPicture(photoArray[i]));
+  for (var i = 0; i < pictures.length; i++) {
+    fragment.appendChild(getPicture(pictures[i]));
   }
   pictureElement.appendChild(fragment);
 };
 
-getElement();
+createPictures();
 renderPictures();
-console.log(photoArray);
+
+// module3-task3
+
+var bigPicture = document.querySelector('.big-picture');
+var bigPictureComment = bigPicture.querySelector('.social__comment');
+var bigPictureComments = bigPicture.querySelector('.social__comments');
+
+bigPicture.classList.remove('hidden');
+
+// Спрятать блоки счётчика комментариев и загрузки новых комментариев
+bigPicture.querySelector('.social__comment-count').classList.add('hidden');
+bigPicture.querySelector('.comments-loader').classList.add('hidden');
+
+// Убрать скролл на контейнере с фотографиями позади
+document.querySelector('body').classList.add('modal-open');
+
+// Заполняю комментарий информацией
+var renderComment = function (item) {
+  var newComment = bigPictureComment.cloneNode(true);
+  newComment.querySelector('.social__picture').src = item.avatar;
+  newComment.querySelector('.social__picture').alt = item.name;
+  newComment.querySelector('.social__text').textContent = item.message;
+  return newComment;
+};
+
+// Заполняю фотографию информацией
+var renderBigPicture = function (photo) {
+  bigPicture.querySelector('.big-picture__img > img').src = photo.url;
+  bigPicture.querySelector('.comments-count').textContent = photo.comments.length;
+  bigPicture.querySelector('.likes-count').textContent = photo.likes;
+  bigPicture.querySelector('.social__caption').textContent = photo.description;
+  createComments(photo);
+};
+
+// Создаю комментарии под фотографией
+var createComments = function (photo) {
+  for (var i = 0; i < photo.comments.length; i++) {
+    fragment.appendChild(renderComment(photo.comments[i]));
+  }
+  bigPictureComments.appendChild(fragment);
+};
+
+renderBigPicture(pictures[0]);

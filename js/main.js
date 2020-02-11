@@ -181,10 +181,10 @@ editionFileClose.addEventListener('click', function () {
 });
 
 // Масшабирование
-var scaleControlSmaller = document.querySelector('.scale__control--smaller');
-var scaleControlBigger = document.querySelector('.scale__control--bigger');
-var scaleControlValue = document.querySelector('.scale__control--value');
 var imgUploadScale = document.querySelector('.img-upload__scale');
+var scaleControlSmaller = imgUploadScale.querySelector('.scale__control--smaller');
+var scaleControlBigger = imgUploadScale.querySelector('.scale__control--bigger');
+var scaleControlValue = imgUploadScale.querySelector('.scale__control--value');
 scaleControlValue.value = SCALE_DEFAULT + '%';
 
 var changeScale = function (evt) {

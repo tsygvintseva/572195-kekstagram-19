@@ -192,17 +192,23 @@ scaleControlValue.value = SCALE.DEFAULT + '%';
 
 var changeScaleDown = function () {
   var scaleValue = parseInt(scaleControlValue.value, 10);
-  if (scaleValue > SCALE.MIN) {
+  if (scaleValue - SCALE.STEP >= SCALE.MIN) {
     imgUploadPreview.style.transform = 'scale(' + (scaleValue - SCALE.STEP) / 100 + ')';
     scaleControlValue.value = (scaleValue - SCALE.STEP) + '%';
+  } else {
+    imgUploadPreview.style.transform = 'scale(' + (SCALE.MIN) / 100 + ')';
+    scaleControlValue.value = SCALE.MIN + '%';
   }
 };
 
 var changeScaleUp = function () {
   var scaleValue = parseInt(scaleControlValue.value, 10);
-  if (scaleValue < SCALE.MAX) {
+  if (scaleValue + SCALE.STEP <= SCALE.MAX) {
     imgUploadPreview.style.transform = 'scale(' + (scaleValue + SCALE.STEP) / 100 + ')';
     scaleControlValue.value = (scaleValue + SCALE.STEP) + '%';
+  } else {
+    imgUploadPreview.style.transform = 'scale(' + (SCALE.MAX) / 100 + ')';
+    scaleControlValue.value = SCALE.MAX + '%';
   }
 };
 
@@ -214,6 +220,7 @@ var currentEffect = EFFECT.NONE;
 var effectLevelPin = editionFileOpen.querySelector('.effect-level__pin');
 var effectsRadio = editionFileOpen.querySelectorAll('.effects__radio');
 var imgUploadPreview = editionFileOpen.querySelector('.img-upload__preview');
+var effectLevelLine = editionFileOpen.querySelector('.effect-level__line');
 
 var selectEffect = function (value) {
   switch (currentEffect) {
@@ -238,9 +245,7 @@ var onEffectChange = function (evt) {
 };
 
 var getSaturationValue = function (evt) {
-  var rect = evt.target.getBoundingClientRect();
-  var offsetX = evt.clientX - rect.left;
-  return Math.ceil(offsetX * 1000 / rect.width) / 1000;
+  return (evt.target.offsetLeft / effectLevelLine.offsetWidth).toFixed(2);
 };
 
 var onSaturationChange = function (evt) {

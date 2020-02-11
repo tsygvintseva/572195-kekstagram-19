@@ -19,10 +19,12 @@ var COMMENTS_QUANTITY_MAX = 5;
 var AUTHORS_NAMES = ['Антон', 'Андрей', 'Екатерина', 'Владислав', 'Софья'];
 var ESC_KEY = 'Escape';
 
-var SCALE_MIN = 25;
-var SCALE_MAX = 100;
-var SCALE_DEFAULT = 100;
-var SCALE_STEP = 25;
+var SCALE = {
+  MIN: 25,
+  MAX: 100,
+  DEFAULT: 100,
+  STEP: 25
+};
 
 var EFFECT = {
   CHROME: 'chrome',
@@ -32,6 +34,7 @@ var EFFECT = {
   PHOBOS: 'phobos',
   HEAT: 'heat',
 };
+
 var PHOBOS_MAX = 3;
 var HEAT_MAX = 3;
 var MARVIN_MAX = 100;
@@ -185,22 +188,26 @@ var imgUploadScale = document.querySelector('.img-upload__scale');
 var scaleControlSmaller = imgUploadScale.querySelector('.scale__control--smaller');
 var scaleControlBigger = imgUploadScale.querySelector('.scale__control--bigger');
 var scaleControlValue = imgUploadScale.querySelector('.scale__control--value');
-scaleControlValue.value = SCALE_DEFAULT + '%';
+scaleControlValue.value = SCALE.DEFAULT + '%';
 
-var changeScale = function (evt) {
-  var currentScaleValue = parseInt(scaleControlValue.value, 10);
-  var scaleValue;
-  if (evt.target === scaleControlSmaller && currentScaleValue !== SCALE_MIN) {
-    scaleControlValue.value = (currentScaleValue - SCALE_STEP) + '%';
-    scaleValue = 'scale(' + (currentScaleValue - SCALE_STEP) / 100 + ')';
-  } else if (evt.target === scaleControlBigger && currentScaleValue !== SCALE_MAX) {
-    scaleControlValue.value = (currentScaleValue + SCALE_STEP) + '%';
-    scaleValue = 'scale(' + (currentScaleValue + SCALE_STEP) / 100 + ')';
+var changeScaleDown = function () {
+  var scaleValue = parseInt(scaleControlValue.value, 10);
+  if (scaleValue > SCALE.MIN) {
+    imgUploadPreview.style.transform = 'scale(' + (scaleValue - SCALE.STEP) / 100 + ')';
+    scaleControlValue.value = (scaleValue - SCALE.STEP) + '%';
   }
-  imgUploadPreview.style.transform = scaleValue;
 };
 
-imgUploadScale.addEventListener('click', changeScale);
+var changeScaleUp = function () {
+  var scaleValue = parseInt(scaleControlValue.value, 10);
+  if (scaleValue < SCALE.MAX) {
+    imgUploadPreview.style.transform = 'scale(' + (scaleValue + SCALE.STEP) / 100 + ')';
+    scaleControlValue.value = (scaleValue + SCALE.STEP) + '%';
+  }
+};
+
+scaleControlSmaller.addEventListener('click', changeScaleDown);
+scaleControlBigger.addEventListener('click', changeScaleUp);
 
 // Процесс перемещения (этап отпускания)
 var currentEffect = EFFECT.NONE;

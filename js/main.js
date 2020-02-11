@@ -146,6 +146,7 @@ renderBigPicture(pictures[0]);
 // module4-task2
 
 // Загрузка изображения и показ формы редактирования
+<<<<<<< HEAD
 var upload = document.querySelector('#upload-file');
 var editionFileOpen = document.querySelector('.img-upload__overlay');
 var editionFileClose = editionFileOpen.querySelector('#upload-cancel');
@@ -155,10 +156,28 @@ var openPopup = function () {
   editionFileOpen.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscPress);
+=======
+var ESC_KEY = 'Escape';
+
+var upload = document.querySelector('#upload-file');
+var editionFileOpen = document.querySelector('.img-upload__overlay');
+var editionFileClose = editionFileOpen.querySelector('#upload-cancel');
+
+var openPopup = function () {
+  editionFileOpen.classList.remove('hidden');
+  document.querySelector('body').classList.add('modal-open');
+
+  document.addEventListener('keydown', function (evt) {
+    if (evt.key === ESC_KEY && !evt.target.classList.contains('text__hashtags')) {
+      closePopup();
+    }
+  });
+>>>>>>> 078d652b33d26427ac546f143b5d8eb4ca9a64d0
 };
 
 var closePopup = function () {
   editionFileOpen.classList.add('hidden');
+<<<<<<< HEAD
   body.classList.remove('modal-open');
   upload.value = '';
   document.removeEventListener('keydown', onPopupEscPress);
@@ -170,6 +189,10 @@ var onPopupEscPress = function (evt) {
     !evt.target.classList.contains('text__description')) {
     closePopup();
   }
+=======
+  document.querySelector('body').classList.remove('modal-open');
+  upload.value = '';
+>>>>>>> 078d652b33d26427ac546f143b5d8eb4ca9a64d0
 };
 
 upload.addEventListener('change', function () {
@@ -180,6 +203,7 @@ editionFileClose.addEventListener('click', function () {
   closePopup();
 });
 
+<<<<<<< HEAD
 // Масшабирование
 var imgUploadScale = document.querySelector('.img-upload__scale');
 var scaleControlSmaller = imgUploadScale.querySelector('.scale__control--smaller');
@@ -222,11 +246,41 @@ var selectEffect = function (value) {
       return 'brightness(' + HEAT_MAX * value + ')';
     default:
       return '';
+=======
+
+// Процесс перемещения (этап отпускания).
+var EFFECT_CHROME = 'chrome';
+var EFFECT_NONE = 'none';
+var EFFECT_SEPIA = 'sepia';
+var EFFECT_MARVIN = 'marvin';
+var EFFECT_PHOBOS = 'phobos';
+var EFFECT_HEAT = 'heat';
+
+var currentEffect = EFFECT_NONE;
+var effectLevel = editionFileOpen.querySelector('.effect-level');
+var effectsRadio = editionFileOpen.querySelectorAll('.effects__radio');
+var imgUploadPreview = editionFileOpen.querySelector('.img-upload__preview');
+
+var selectEffect = function (percent) {
+  if (currentEffect === EFFECT_CHROME) {
+    imgUploadPreview.style.filter = 'grayscale(' + percent + '1)';
+  } else if (currentEffect === EFFECT_SEPIA) {
+    imgUploadPreview.style.filter = 'sepia(' + percent + '1)';
+  } else if (currentEffect === EFFECT_MARVIN) {
+    imgUploadPreview.style.filter = 'invert(' + percent * 100 + '%)';
+  } else if (currentEffect === EFFECT_PHOBOS) {
+    imgUploadPreview.style.filter = 'blur(' + 3 * percent + 'px)';
+  } else if (currentEffect === EFFECT_HEAT) {
+    imgUploadPreview.style.filter = 'brightness(' + 3 * percent + ')';
+  } else if (currentEffect === EFFECT_NONE) {
+    imgUploadPreview.style.filter = '';
+>>>>>>> 078d652b33d26427ac546f143b5d8eb4ca9a64d0
   }
 };
 
 var onEffectChange = function (evt) {
   currentEffect = evt.target.value;
+<<<<<<< HEAD
   imgUploadPreview.style.filter = selectEffect(1);
 };
 
@@ -239,12 +293,29 @@ var getSaturationValue = function (evt) {
 var onSaturationChange = function (evt) {
   var value = getSaturationValue(evt);
   imgUploadPreview.style.filter = selectEffect(value);
+=======
+  selectEffect(1);
+};
+
+var getSaturationPercent = function (evt) {
+  var rect = evt.target.getBoundingClientRect();
+  var offsetX = evt.clientX - rect.left;
+  var percent = offsetX / rect.width;
+
+  return percent;
+};
+
+var onSaturationChange = function (evt) {
+  var percent = getSaturationPercent(evt);
+  selectEffect(percent);
+>>>>>>> 078d652b33d26427ac546f143b5d8eb4ca9a64d0
 };
 
 for (var j = 0; j < effectsRadio.length; j++) {
   effectsRadio[j].addEventListener('change', onEffectChange);
 }
 
+<<<<<<< HEAD
 effectLevelPin.addEventListener('mouseup', onSaturationChange);
 
 // Валидация хэш-тегов
@@ -284,3 +355,40 @@ var validateHashtags = function (value) {
 textHashtags.addEventListener('input', function (evt) {
   textHashtags.setCustomValidity(validateHashtags(evt.target.value));
 });
+=======
+effectLevel.addEventListener('mouseup', onSaturationChange);
+
+// Валидация хэш-тегов
+var MAX_HASHTAG_LENGTH = 20;
+var MAX_HASHTAGS = 5;
+
+var textHashtags = editionFileOpen.querySelector('.text__hashtags');
+
+var validateHashtags = function () {
+  var hashtags = textHashtags.value.toLowerCase().split('');
+  for (var i = 0; i < hashtags.length; i++) {
+    var findDuplicateHashtags = hashtags.filter(function (item) {
+      return item === hashtags[i];
+    });
+    if (hashtags[i][0] !== '#') {
+      textHashtags.setCustomValidity('Хэш-тег должен начинаться с #');
+    } else if (hashtags.length === 1 && hashtags[i] === '#') {
+      textHashtags.setCustomValidity('Хэш-тег не может быть только #');
+    } else if (hashtags[i].length > MAX_HASHTAG_LENGTH) {
+      textHashtags.setCustomValidity('Хэш-тег не может быть длинее 20-ти символов, включая решётку');
+    } else if (hashtags[i].lastIndexOf('#') !== 0) {
+      textHashtags.setCustomValidity('Хэш-теги должны быть разделены пробелами');
+    } else if (hashtags.length > MAX_HASHTAGS) {
+      textHashtags.setCustomValidity('Нельзя указать больше 5-ти хэш-тегов');
+    } else if (findDuplicateHashtags.length > 1) {
+      textHashtags.setCustomValidity('Один и тот же хэш-тег не может быть использован дважды');
+    } else if (/[^a-zA-Z0-9]/.test(hashtags.substr(1, (hashtags.length - 1)))) {
+      textHashtags.setCustomValidity('Строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т.п.), символы пунктуации (тире, дефис, запятая и т.п.), эмодзи и т.д.');
+    } else {
+      textHashtags.setCustomValidity('');
+    }
+  }
+};
+
+textHashtags.addEventListener('input', validateHashtags());
+>>>>>>> 078d652b33d26427ac546f143b5d8eb4ca9a64d0

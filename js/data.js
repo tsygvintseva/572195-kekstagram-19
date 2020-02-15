@@ -19,24 +19,20 @@
   var COMMENTS_QUANTITY_MAX = 5;
   var AUTHORS_NAMES = ['Антон', 'Андрей', 'Екатерина', 'Владислав', 'Софья'];
 
-  var getRandomValue = function (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-
   var pictures = [];
 
   var getComment = function () {
     var comment = {
-      avatar: 'img/avatar-' + getRandomValue(AVATAR_MIN, AVATAR_MAX) + '.svg',
-      name: AUTHORS_NAMES[getRandomValue(0, AUTHORS_NAMES.length - 1)],
-      message: COMMENTS[getRandomValue(0, COMMENTS.length - 1)],
+      avatar: 'img/avatar-' + window.utils.getRandomValue(AVATAR_MIN, AVATAR_MAX) + '.svg',
+      name: AUTHORS_NAMES[window.utils.getRandomValue(0, AUTHORS_NAMES.length - 1)],
+      message: COMMENTS[window.utils.getRandomValue(0, COMMENTS.length - 1)],
     };
     return comment;
   };
 
   var getComments = function () {
     var commentsArray = [];
-    var comments = getRandomValue(COMMENTS_QUANTITY_MIN, COMMENTS_QUANTITY_MAX);
+    var comments = window.utils.getRandomValue(COMMENTS_QUANTITY_MIN, COMMENTS_QUANTITY_MAX);
     for (var i = 1; i <= comments; i++) {
       commentsArray.push(getComment());
     }
@@ -48,9 +44,9 @@
       pictures.push(
           {
             url: 'photos/' + i + '.jpg',
-            likes: getRandomValue(LIKES_MIN, LIKES_MAX),
+            likes: window.utils.getRandomValue(LIKES_MIN, LIKES_MAX),
             comments: getComments(),
-            description: DESCRIPTION[getRandomValue(0, DESCRIPTION.length - 1)],
+            description: DESCRIPTION[window.utils.getRandomValue(0, DESCRIPTION.length - 1)],
           });
     }
 

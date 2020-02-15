@@ -46,7 +46,7 @@
                   <!-- Изменение размера изображения -->
                   <fieldset class="img-upload__scale  scale">
                     <button type="button" class="scale__control  scale__control--smaller">Уменьшить</button>
-                    <input type="text" class="scale__control  scale__control--value" value="55%" title="Image Scale" name="scale" readonly>
+                    <input type="text" class="scale__control  scale__control--value" value="100%" title="Image Scale" name="scale" readonly>
                     <button type="button" class="scale__control  scale__control--bigger">Увеличить</button>
                   </fieldset>
 
@@ -232,6 +232,14 @@
   <template id="messages">
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
-  <script src="js/main.js"></script>
+
+  <script src="js/utils.js"></script> <!-- общее -->
+  <script src="js/data.js"></script> <!-- создаёт данные -->
+  <script src="js/picture.js"></script> <!-- отрисовка миниатюры -->
+  <script src="js/preview.js"></script> <!-- отрисовка увеличенного изображения -->
+  <script src="js/form.js"></script> <!-- форма редактирования изображения -->
+  <script src="js/effects.js"></script> <!-- эффекты -->
+  <script src="js/scale.js"></script> <!-- масштабирование -->
+  <script src="js/hashtags.js"></script> <!-- хэш-теги -->
 </body>
 </html>

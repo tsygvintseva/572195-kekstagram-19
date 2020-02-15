@@ -13,16 +13,17 @@
     editionFileOpen.classList.remove('hidden');
     window.preview.body.classList.add('modal-open');
     document.addEventListener('keydown', onPopupEscPress);
+    window.effects.effectLevelPin.addEventListener('mousedown', window.effects.moveSetup);
     window.effects.imgUploadEffectLevel.classList.add('hidden');
+    window.effects.resetSliderValue();
+    upload.value = '';
   };
 
   // Закрытие формы редактирования
   var closePopup = function () {
     editionFileOpen.classList.add('hidden');
     window.preview.body.classList.remove('modal-open');
-    upload.value = '';
-    imgUploadPreview.style.filter = '';
-    imgUploadPreview.style.transform = '';
+    window.effects.effectLevelPin.removeEventListener('mousedown', window.effects.moveSetup);
     document.removeEventListener('keydown', onPopupEscPress);
   };
 

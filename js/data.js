@@ -1,23 +1,16 @@
 'use strict';
 
 (function () {
-  var LIKES_MIN = 15;
-  var LIKES_MAX = 200;
-  var AVATAR_MIN = 1;
-  var AVATAR_MAX = 6;
-  var QUANTITY_PHOTOS = 25;
-  var COMMENTS = [
-    'Всё отлично!',
-    'В целом всё неплохо. Но не всё.',
-    'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-    'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-    'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-    'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-  ];
-  var DESCRIPTION = ['#js', '#это', '#боль', '#крик', '#души'];
-  var COMMENTS_QUANTITY_MIN = 1;
-  var COMMENTS_QUANTITY_MAX = 5;
-  var AUTHORS_NAMES = ['Антон', 'Андрей', 'Екатерина', 'Владислав', 'Софья'];
+  var LIKES_MIN = window.constants.LIKES_MIN;
+  var LIKES_MAX = window.constants.LIKES_MAX;
+  var AVATAR_MIN = window.constants.AVATAR_MIN;
+  var AVATAR_MAX = window.constants.AVATAR_MAX;
+  var QUANTITY_PHOTOS = window.constants.QUANTITY_PHOTOS;
+  var COMMENTS = window.constants.COMMENTS;
+  var DESCRIPTION = window.constants.DESCRIPTION;
+  var COMMENTS_QUANTITY_MIN = window.constants.COMMENTS_QUANTITY_MIN;
+  var COMMENTS_QUANTITY_MAX = window.constants.COMMENTS_QUANTITY_MAX;
+  var AUTHORS_NAMES = window.constants.AUTHORS_NAMES;
 
   var pictures = [];
 

@@ -1,12 +1,7 @@
 'use strict';
 
 (function () {
-  var SCALE = {
-    MIN: 25,
-    MAX: 100,
-    DEFAULT: 100,
-    STEP: 25
-  };
+  var SCALE = window.constants.SCALE;
 
   // Масшабирование
   var imgUploadScale = document.querySelector('.img-upload__scale');

@@ -1,18 +1,11 @@
 'use strict';
 
 (function () {
-  var EFFECT = {
-    CHROME: 'chrome',
-    NONE: 'none',
-    SEPIA: 'sepia',
-    MARVIN: 'marvin',
-    PHOBOS: 'phobos',
-    HEAT: 'heat',
-  };
+  var EFFECT = window.constants.EFFECT;
 
-  var PHOBOS_MAX = 3;
-  var HEAT_MAX = 3;
-  var MARVIN_MAX = 100;
+  var PHOBOS_MAX = window.constants.PHOBOS_MAX;
+  var HEAT_MAX = window.constants.HEAT_MAX;
+  var MARVIN_MAX = window.constants.MARVIN_MAX;
 
   // Процесс перемещения (этап отпускания)
   var currentEffect = EFFECT.NONE;

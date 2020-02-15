@@ -1,8 +1,8 @@
 'use strict';
 
 (function () {
-  var HASHTAG_LENGTH_MAX = 20;
-  var HASHTAGS_MAX = 5;
+  var HASHTAG_LENGTH_MAX = window.constants.HASHTAG_LENGTH_MAX;
+  var HASHTAGS_MAX = window.constants.HASHTAGS_MAX;
 
   // Валидация хэш-тегов
   var textHashtags = window.form.editionFileOpen.querySelector('.text__hashtags');

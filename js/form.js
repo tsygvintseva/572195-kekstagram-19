@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var ESC_KEY = window.constants.ESC_KEY;
 
   var upload = document.querySelector('#upload-file');
   var editionFileOpen = document.querySelector('.img-upload__overlay');
@@ -11,7 +12,7 @@
   var openPopup = function () {
     editionFileOpen.classList.remove('hidden');
     window.preview.body.classList.add('modal-open');
-    document.addEventListener('keydown', window.utils.onPopupEscPress);
+    document.addEventListener('keydown', onPopupEscPress);
     window.effects.imgUploadEffectLevel.classList.add('hidden');
   };
 
@@ -22,7 +23,16 @@
     upload.value = '';
     imgUploadPreview.style.filter = '';
     imgUploadPreview.style.transform = '';
-    document.removeEventListener('keydown', window.utils.onPopupEscPress);
+    document.removeEventListener('keydown', onPopupEscPress);
+  };
+
+  var onPopupEscPress = function (evt) {
+    if (evt.key === ESC_KEY &&
+      !evt.target.classList.contains('text__hashtags') &&
+      !evt.target.classList.contains('text__description')) {
+      closePopup();
+      window.preview.closePopupPreview();
+    }
   };
 
   upload.addEventListener('change', function () {
@@ -35,6 +45,7 @@
 
   window.form = {
     closePopup: closePopup,
+    onPopupEscPress: onPopupEscPress,
     imgUploadPreview: imgUploadPreview,
     editionFileOpen: editionFileOpen,
   };

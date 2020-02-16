@@ -1,13 +1,14 @@
 'use strict';
 
 (function () {
-  var EFFECT = window.constants.EFFECT;
-  var PHOBOS_MAX = window.constants.PHOBOS_MAX;
-  var HEAT_MAX = window.constants.HEAT_MAX;
-  var MARVIN_MAX = window.constants.MARVIN_MAX;
+  var CONST = window.constants;
+  var EFFECT = CONST.EFFECT;
+  var PHOBOS_MAX = CONST.PHOBOS_MAX;
+  var HEAT_MAX = CONST.HEAT_MAX;
+  var MARVIN_MAX = CONST.MARVIN_MAX;
 
   // Процесс перемещения (этап отпускания)
-  var currentEffect = window.constants.EFFECT.NONE;
+  var currentEffect = CONST.EFFECT.NONE;
   var effectLevelPin = window.form.editionFileOpen.querySelector('.effect-level__pin');
   var effectsRadio = window.form.editionFileOpen.querySelectorAll('.effects__radio');
   var effectLevelLine = window.form.editionFileOpen.querySelector('.effect-level__line');
@@ -52,7 +53,7 @@
     effectsRadio[j].addEventListener('change', onEffectChange);
   }
 
-  effectLevelPin.addEventListener('mouseup', onSaturationChange);
+  effectLevelPin.addEventListener('mousemove', onSaturationChange);
 
   var moveSetup = function (evt) {
     var startCoordsX = evt.clientX;
@@ -81,8 +82,8 @@
   };
 
   var resetSliderValue = function () {
-    effectLevelPin.style.left = window.constants.DEFAULT_EFFECT_PIN;
-    effectLevelDepth.style.width = window.constants.DEFAULT_EFFECT_DEPTH;
+    effectLevelPin.style.left = CONST.DEFAULT_EFFECT_PIN;
+    effectLevelDepth.style.width = CONST.DEFAULT_EFFECT_DEPTH;
     window.form.imgUploadPreview.style.filter = '';
     window.form.imgUploadPreview.style.transform = '';
   };

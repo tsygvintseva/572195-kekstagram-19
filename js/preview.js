@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-  var ENTER_KEY = window.constants.ENTER_KEY;
+  var CONST = window.constants;
+  var ENTER_KEY = CONST.ENTER_KEY;
 
   var bigPicture = document.querySelector('.big-picture');
   var bigPictureComment = bigPicture.querySelector('.social__comment');

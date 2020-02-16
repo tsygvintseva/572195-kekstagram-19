@@ -1,16 +1,17 @@
 'use strict';
 
 (function () {
-  var LIKES_MIN = window.constants.LIKES_MIN;
-  var LIKES_MAX = window.constants.LIKES_MAX;
-  var AVATAR_MIN = window.constants.AVATAR_MIN;
-  var AVATAR_MAX = window.constants.AVATAR_MAX;
-  var QUANTITY_PHOTOS = window.constants.QUANTITY_PHOTOS;
-  var COMMENTS = window.constants.COMMENTS;
-  var DESCRIPTION = window.constants.DESCRIPTION;
-  var COMMENTS_QUANTITY_MIN = window.constants.COMMENTS_QUANTITY_MIN;
-  var COMMENTS_QUANTITY_MAX = window.constants.COMMENTS_QUANTITY_MAX;
-  var AUTHORS_NAMES = window.constants.AUTHORS_NAMES;
+  var CONST = window.constants;
+  var LIKES_MIN = CONST.LIKES_MIN;
+  var LIKES_MAX = CONST.LIKES_MAX;
+  var AVATAR_MIN = CONST.AVATAR_MIN;
+  var AVATAR_MAX = CONST.AVATAR_MAX;
+  var QUANTITY_PHOTOS = CONST.QUANTITY_PHOTOS;
+  var COMMENTS = CONST.COMMENTS;
+  var DESCRIPTION = CONST.DESCRIPTION;
+  var COMMENTS_QUANTITY_MIN = CONST.COMMENTS_QUANTITY_MIN;
+  var COMMENTS_QUANTITY_MAX = CONST.COMMENTS_QUANTITY_MAX;
+  var AUTHORS_NAMES = CONST.AUTHORS_NAMES;
 
   var pictures = [];
 

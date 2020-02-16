@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-  var ESC_KEY = window.constants.ESC_KEY;
+  var CONST = window.constants;
+  var ESC_KEY = CONST.ESC_KEY;
 
   var upload = document.querySelector('#upload-file');
   var editionFileOpen = document.querySelector('.img-upload__overlay');

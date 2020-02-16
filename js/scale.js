@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-  var SCALE = window.constants.SCALE;
+  var CONST = window.constants;
+  var SCALE = CONST.SCALE;
 
   // Масшабирование
   var imgUploadScale = document.querySelector('.img-upload__scale');

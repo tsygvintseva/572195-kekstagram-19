@@ -3,6 +3,7 @@
 (function () {
   var CONST = window.constants;
   var preview = window.preview;
+  var effects = window.effects;
 
   var upload = document.querySelector('#upload-file');
   var editionFileOpen = document.querySelector('.img-upload__overlay');
@@ -14,9 +15,9 @@
     editionFileOpen.classList.remove('hidden');
     preview.body.classList.add('modal-open');
     document.addEventListener('keydown', onPopupEscPress);
-    window.effects.effectLevelPin.addEventListener('mousedown', window.effects.moveSetup);
-    window.effects.imgUploadEffectLevel.classList.add('hidden');
-    window.effects.resetSliderValue();
+    effects.effectLevelPin.addEventListener('mousedown', effects.moveSetup);
+    effects.imgUploadEffectLevel.classList.add('hidden');
+    effects.resetSliderValue();
     upload.value = '';
   };
 
@@ -24,7 +25,7 @@
   var closePopup = function () {
     editionFileOpen.classList.add('hidden');
     preview.body.classList.remove('modal-open');
-    window.effects.effectLevelPin.removeEventListener('mousedown', window.effects.moveSetup);
+    effects.effectLevelPin.removeEventListener('mousedown', effects.moveSetup);
     document.removeEventListener('keydown', onPopupEscPress);
   };
 

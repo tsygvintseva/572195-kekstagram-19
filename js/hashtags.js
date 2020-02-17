@@ -2,11 +2,10 @@
 
 (function () {
   var CONST = window.constants;
-  var HASHTAG_LENGTH_MAX = CONST.HASHTAG_LENGTH_MAX;
-  var HASHTAGS_MAX = CONST.HASHTAGS_MAX;
+  var form = window.form;
 
   // Валидация хэш-тегов
-  var textHashtags = window.form.editionFileOpen.querySelector('.text__hashtags');
+  var textHashtags = form.editionFileOpen.querySelector('.text__hashtags');
 
   var validateHashtags = function (value) {
     var hashtags = value.toLowerCase().trim().split(/\s+/);
@@ -17,7 +16,7 @@
       if (hashtags.length === 1 && hashtags[i] === '#') {
         return 'Хэш-тег не может быть только #';
       }
-      if (hashtags[i].length > HASHTAG_LENGTH_MAX) {
+      if (hashtags[i].length > CONST.HASHTAG_LENGTH_MAX) {
         return 'Хэш-тег не может быть длинее 20-ти символов, включая решётку';
       }
       if (hashtags[i].lastIndexOf('#') !== 0) {
@@ -33,7 +32,7 @@
         return 'Один и тот же хэш-тег не может быть использован дважды';
       }
     }
-    if (hashtags.length > HASHTAGS_MAX) {
+    if (hashtags.length > CONST.HASHTAGS_MAX) {
       return 'Нельзя указать больше 5-ти хэш-тегов';
     }
     return '';

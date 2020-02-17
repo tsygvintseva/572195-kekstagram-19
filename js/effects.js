@@ -2,10 +2,6 @@
 
 (function () {
   var CONST = window.constants;
-  var EFFECT = CONST.EFFECT;
-  var PHOBOS_MAX = CONST.PHOBOS_MAX;
-  var HEAT_MAX = CONST.HEAT_MAX;
-  var MARVIN_MAX = CONST.MARVIN_MAX;
 
   // Процесс перемещения (этап отпускания)
   var currentEffect = CONST.EFFECT.NONE;
@@ -18,16 +14,16 @@
   var selectEffect = function (value) {
     imgUploadEffectLevel.classList.remove('hidden');
     switch (currentEffect) {
-      case EFFECT.CHROME :
+      case CONST.EFFECT.CHROME :
         return 'grayscale(' + value + ')';
-      case EFFECT.SEPIA:
+      case CONST.EFFECT.SEPIA:
         return 'sepia(' + value + ')';
-      case EFFECT.MARVIN:
-        return 'invert(' + value * MARVIN_MAX + '%)';
-      case EFFECT.PHOBOS:
-        return 'blur(' + PHOBOS_MAX * value + 'px)';
-      case EFFECT.HEAT:
-        return 'brightness(' + HEAT_MAX * value + ')';
+      case CONST.EFFECT.MARVIN:
+        return 'invert(' + value * CONST.MARVIN_MAX + '%)';
+      case CONST.EFFECT.PHOBOS:
+        return 'blur(' + CONST.PHOBOS_MAX * value + 'px)';
+      case CONST.EFFECT.HEAT:
+        return 'brightness(' + CONST.HEAT_MAX * value + ')';
       default:
         imgUploadEffectLevel.classList.add('hidden');
         return '';

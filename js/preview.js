@@ -2,7 +2,7 @@
 
 (function () {
   var CONST = window.constants;
-  var ENTER_KEY = CONST.ENTER_KEY;
+  // var ENTER_KEY = CONST.ENTER_KEY;
 
   var bigPicture = document.querySelector('.big-picture');
   var bigPictureComment = bigPicture.querySelector('.social__comment');
@@ -60,7 +60,7 @@
   };
 
   var onPictureEnterPress = function (evt) {
-    if (evt.key === ENTER_KEY) {
+    if (evt.key === CONST.ENTER_KEY) {
       var activePicture = evt.target.children[0].attributes.src.value;
       window.preview.showBigPhoto(activePicture);
     }

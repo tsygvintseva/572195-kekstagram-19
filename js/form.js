@@ -3,27 +3,31 @@
 (function () {
   var CONST = window.constants;
 
+  var body = document.querySelector('body');
   var upload = document.querySelector('#upload-file');
   var editionFileOpen = document.querySelector('.img-upload__overlay');
   var editionFileClose = editionFileOpen.querySelector('#upload-cancel');
   var imgUploadPreview = editionFileOpen.querySelector('.img-upload__preview');
+  var effectLevelPin = editionFileOpen.querySelector('.effect-level__pin');
+  var effectsRadio = editionFileOpen.querySelectorAll('.effects__radio');
+  var effectLevelLine = editionFileOpen.querySelector('.effect-level__line');
+  var imgUploadEffectLevel = editionFileOpen.querySelector('.img-upload__effect-level');
+  var effectLevelDepth = editionFileOpen.querySelector('.effect-level__depth');
 
   // Открытие формы редактирования
   var openPopup = function () {
     editionFileOpen.classList.remove('hidden');
-    window.preview.body.classList.add('modal-open');
+    body.classList.add('modal-open');
     document.addEventListener('keydown', onPopupEscPress);
-    window.effects.effectLevelPin.addEventListener('mousedown', window.effects.moveSetup);
-    window.effects.imgUploadEffectLevel.classList.add('hidden');
-    window.effects.resetSliderValue();
+    imgUploadEffectLevel.classList.add('hidden');
+    resetEffectsValue();
     upload.value = '';
   };
 
   // Закрытие формы редактирования
   var closePopup = function () {
     editionFileOpen.classList.add('hidden');
-    window.preview.body.classList.remove('modal-open');
-    window.effects.effectLevelPin.removeEventListener('mousedown', window.effects.moveSetup);
+    body.classList.remove('modal-open');
     document.removeEventListener('keydown', onPopupEscPress);
   };
 
@@ -43,8 +47,22 @@
     closePopup();
   });
 
+  var resetEffectsValue = function () {
+    effectLevelPin.style.left = CONST.DEFAULT_EFFECT_PIN;
+    effectLevelDepth.style.width = CONST.DEFAULT_EFFECT_DEPTH;
+    imgUploadPreview.style.filter = '';
+    imgUploadPreview.style.transform = '';
+  };
+
   window.form = {
+    body: body,
     imgUploadPreview: imgUploadPreview,
     editionFileOpen: editionFileOpen,
+    effectLevelPin: effectLevelPin,
+    imgUploadEffectLevel: imgUploadEffectLevel,
+    effectsRadio: effectsRadio,
+    effectLevelLine: effectLevelLine,
+    effectLevelDepth: effectLevelDepth,
+    resetEffectsValue: resetEffectsValue,
   };
 })();

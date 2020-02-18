@@ -4,19 +4,19 @@
   var CONST = window.constants;
   var picture = window.picture;
   var data = window.data;
+  var form = window.form;
 
   var bigPicture = document.querySelector('.big-picture');
   var bigPictureComment = bigPicture.querySelector('.social__comment');
   var bigPictureComments = bigPicture.querySelector('.social__comments');
   var closeBigPictureButton = bigPicture.querySelector('.big-picture__cancel');
-  var body = document.querySelector('body');
 
   // Спрятать блоки счётчика комментариев и загрузки новых комментариев
   bigPicture.querySelector('.social__comment-count').classList.add('hidden');
   bigPicture.querySelector('.comments-loader').classList.add('hidden');
 
   // Убрать скролл на контейнере с фотографиями позади
-  body.classList.add('modal-open');
+  form.body.classList.add('modal-open');
 
   var renderComment = function (item) {
     var newComment = bigPictureComment.cloneNode(true);
@@ -49,14 +49,14 @@
   // Открытие изображения
   var openPopupPreview = function () {
     bigPicture.classList.remove('hidden');
-    body.classList.add('modal-open');
+    form.body.classList.add('modal-open');
     document.addEventListener('keydown', onPictureEscPress);
   };
 
   // Закрытие изображения
   var closePopupPreview = function () {
     bigPicture.classList.add('hidden');
-    body.classList.remove('modal-open');
+    form.body.classList.remove('modal-open');
     document.removeEventListener('keydown', onPictureEscPress);
   };
 
@@ -95,7 +95,4 @@
     closePopupPreview();
   });
 
-  window.preview = {
-    body: body,
-  };
 })();

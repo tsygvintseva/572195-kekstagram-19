@@ -1,38 +1,23 @@
 'use strict';
 
 (function () {
-  var LIKES_MIN = 15;
-  var LIKES_MAX = 200;
-  var AVATAR_MIN = 1;
-  var AVATAR_MAX = 6;
-  var QUANTITY_PHOTOS = 25;
-  var COMMENTS = [
-    'Всё отлично!',
-    'В целом всё неплохо. Но не всё.',
-    'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-    'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-    'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-    'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-  ];
-  var DESCRIPTION = ['#js', '#это', '#боль', '#крик', '#души'];
-  var COMMENTS_QUANTITY_MIN = 1;
-  var COMMENTS_QUANTITY_MAX = 5;
-  var AUTHORS_NAMES = ['Антон', 'Андрей', 'Екатерина', 'Владислав', 'Софья'];
+  var CONST = window.constants;
+  var utils = window.utils;
 
   var pictures = [];
 
   var getComment = function () {
     var comment = {
-      avatar: 'img/avatar-' + window.utils.getRandomValue(AVATAR_MIN, AVATAR_MAX) + '.svg',
-      name: AUTHORS_NAMES[window.utils.getRandomValue(0, AUTHORS_NAMES.length - 1)],
-      message: COMMENTS[window.utils.getRandomValue(0, COMMENTS.length - 1)],
+      avatar: 'img/avatar-' + utils.getRandomValue(CONST.AVATAR_MIN, CONST.AVATAR_MAX) + '.svg',
+      name: CONST.AUTHORS_NAMES[utils.getRandomValue(0, CONST.AUTHORS_NAMES.length - 1)],
+      message: CONST.COMMENTS[utils.getRandomValue(0, CONST.COMMENTS.length - 1)],
     };
     return comment;
   };
 
   var getComments = function () {
     var commentsArray = [];
-    var comments = window.utils.getRandomValue(COMMENTS_QUANTITY_MIN, COMMENTS_QUANTITY_MAX);
+    var comments = utils.getRandomValue(CONST.COMMENTS_QUANTITY_MIN, CONST.COMMENTS_QUANTITY_MAX);
     for (var i = 1; i <= comments; i++) {
       commentsArray.push(getComment());
     }
@@ -40,13 +25,13 @@
   };
 
   var createPictures = function () {
-    for (var i = 1; i <= QUANTITY_PHOTOS; i++) {
+    for (var i = 1; i <= CONST.QUANTITY_PHOTOS; i++) {
       pictures.push(
           {
             url: 'photos/' + i + '.jpg',
-            likes: window.utils.getRandomValue(LIKES_MIN, LIKES_MAX),
+            likes: utils.getRandomValue(CONST.LIKES_MIN, CONST.LIKES_MAX),
             comments: getComments(),
-            description: DESCRIPTION[window.utils.getRandomValue(0, DESCRIPTION.length - 1)],
+            description: CONST.DESCRIPTION[utils.getRandomValue(0, CONST.DESCRIPTION.length - 1)],
           });
     }
 

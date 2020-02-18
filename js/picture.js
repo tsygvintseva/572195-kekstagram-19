@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var data = window.data;
   var pictureElement = document.querySelector('.pictures');
   var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   document.querySelector('.pictures__title').classList.remove('visually-hidden');
@@ -15,8 +16,8 @@
   };
 
   var renderPictures = function () {
-    for (var i = 0; i < window.data.pictures.length; i++) {
-      fragment.appendChild(getPicture(window.data.pictures[i]));
+    for (var i = 0; i < data.pictures.length; i++) {
+      fragment.appendChild(getPicture(data.pictures[i]));
     }
     pictureElement.appendChild(fragment);
   };

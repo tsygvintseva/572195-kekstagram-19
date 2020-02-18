@@ -2,14 +2,15 @@
 
 (function () {
   var CONST = window.constants;
+  var form = window.form;
 
   // Процесс перемещения (этап отпускания)
   var currentEffect = CONST.EFFECT.NONE;
-  var effectLevelPin = window.form.editionFileOpen.querySelector('.effect-level__pin');
-  var effectsRadio = window.form.editionFileOpen.querySelectorAll('.effects__radio');
-  var effectLevelLine = window.form.editionFileOpen.querySelector('.effect-level__line');
-  var imgUploadEffectLevel = window.form.editionFileOpen.querySelector('.img-upload__effect-level');
-  var effectLevelDepth = window.form.editionFileOpen.querySelector('.effect-level__depth');
+  var effectLevelPin = form.editionFileOpen.querySelector('.effect-level__pin');
+  var effectsRadio = form.editionFileOpen.querySelectorAll('.effects__radio');
+  var effectLevelLine = form.editionFileOpen.querySelector('.effect-level__line');
+  var imgUploadEffectLevel = form.editionFileOpen.querySelector('.img-upload__effect-level');
+  var effectLevelDepth = form.editionFileOpen.querySelector('.effect-level__depth');
 
   var selectEffect = function (value) {
     imgUploadEffectLevel.classList.remove('hidden');
@@ -33,16 +34,18 @@
   var onEffectChange = function (evt) {
     currentEffect = evt.target.value;
     resetSliderValue();
-    window.form.imgUploadPreview.style.filter = selectEffect(1);
+    form.imgUploadPreview.style.filter = selectEffect(1);
   };
 
-  var getSaturationValue = function (evt) {
-    return (evt.target.offsetLeft / effectLevelLine.offsetWidth).toFixed(2);
+  var getSaturationValue = function (evt, effectLine) {
+    console.log(evt.target);
+    // return (evt.target.offsetLeft / effectLevelLine.offsetWidth).toFixed(2);
+    return (evt.target.offsetLeft / effectLine.offsetWidth).toFixed(2);
   };
 
   var onSaturationChange = function (evt) {
-    var value = getSaturationValue(evt);
-    window.form.imgUploadPreview.style.filter = selectEffect(value);
+    var value = getSaturationValue(evt, effectLevelLine);
+    form.imgUploadPreview.style.filter = selectEffect(value);
   };
 
   for (var j = 0; j < effectsRadio.length; j++) {
@@ -80,8 +83,8 @@
   var resetSliderValue = function () {
     effectLevelPin.style.left = CONST.DEFAULT_EFFECT_PIN;
     effectLevelDepth.style.width = CONST.DEFAULT_EFFECT_DEPTH;
-    window.form.imgUploadPreview.style.filter = '';
-    window.form.imgUploadPreview.style.transform = '';
+    form.imgUploadPreview.style.filter = '';
+    form.imgUploadPreview.style.transform = '';
   };
 
   window.effects = {

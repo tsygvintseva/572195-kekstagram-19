@@ -50,20 +50,26 @@
   var openPopupPreview = function () {
     bigPicture.classList.remove('hidden');
     body.classList.add('modal-open');
-    document.addEventListener('keydown', window.form.onPopupEscPress);
+    document.addEventListener('keydown', onPictureEscPress);
   };
 
   // Закрытие изображения
   var closePopupPreview = function () {
     bigPicture.classList.add('hidden');
     body.classList.remove('modal-open');
-    document.removeEventListener('keydown', window.form.onPopupEscPress);
+    document.removeEventListener('keydown', onPictureEscPress);
+  };
+
+  var onPictureEscPress = function (evt) {
+    if (evt.key === CONST.ESC_KEY) {
+      closePopupPreview();
+    }
   };
 
   var onPictureEnterPress = function (evt) {
     if (evt.key === CONST.ENTER_KEY) {
       var activePicture = evt.target.children[0].attributes.src.value;
-      window.preview.showBigPhoto(activePicture);
+      showBigPhoto(activePicture);
     }
   };
 
@@ -91,7 +97,5 @@
 
   window.preview = {
     body: body,
-    closePopupPreview: closePopupPreview,
-    showBigPhoto: showBigPhoto,
   };
 })();

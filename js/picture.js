@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var data = window.data;
+  var backend = window.backend;
   var pictureElement = document.querySelector('.pictures');
   var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   document.querySelector('.pictures__title').classList.remove('visually-hidden');
@@ -15,18 +15,29 @@
     return newPicture;
   };
 
-  var renderPictures = function () {
-    for (var i = 0; i < data.pictures.length; i++) {
-      fragment.appendChild(getPicture(data.pictures[i]));
+  var successHandler = function (data) {
+    window.pictures = data;
+    for (var i = 0; i < window.pictures.length; i++) {
+      fragment.appendChild(getPicture(window.pictures[i]));
     }
     pictureElement.appendChild(fragment);
   };
 
-  // createPictures();
-  renderPictures();
+  var errorHandler = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
+
+  backend.load(successHandler, errorHandler);
 
   window.picture = {
     fragment: fragment,
-    pictureElement: pictureElement,
+    element: pictureElement,
   };
 })();

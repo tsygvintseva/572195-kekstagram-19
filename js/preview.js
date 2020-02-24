@@ -3,7 +3,6 @@
 (function () {
   var CONST = window.constants;
   var picture = window.picture;
-  var data = window.data;
   var form = window.form;
 
   var bigPicture = document.querySelector('.big-picture');
@@ -44,8 +43,6 @@
     bigPictureComments.appendChild(picture.fragment);
   };
 
-  renderBigPicture(data.pictures[0]);
-
   // Открытие изображения
   var openPopupPreview = function () {
     bigPicture.classList.remove('hidden');
@@ -74,10 +71,10 @@
   };
 
   var showBigPhoto = function (src) {
-    for (var i = 0; i < data.pictures.length; i++) {
-      if (src === data.pictures[i].url) {
+    for (var i = 0; i < window.pictures.length; i++) {
+      if (src === window.pictures[i].url) {
         openPopupPreview();
-        renderBigPicture(data.pictures[i]);
+        renderBigPicture(window.pictures[i]);
       }
     }
   };
@@ -89,8 +86,8 @@
     }
   };
 
-  picture.pictureElement.addEventListener('click', onPictureClick);
-  picture.pictureElement.addEventListener('keydown', onPictureEnterPress);
+  picture.element.addEventListener('click', onPictureClick);
+  picture.element.addEventListener('keydown', onPictureEnterPress);
   closeBigPictureButton.addEventListener('click', function () {
     closePopupPreview();
   });

@@ -2,10 +2,10 @@
 
 (function () {
   var backend = window.backend;
+  var fragment = document.createDocumentFragment();
   var pictureElement = document.querySelector('.pictures');
   var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   document.querySelector('.pictures__title').classList.remove('visually-hidden');
-  var fragment = document.createDocumentFragment();
 
   var getPicture = function (picture) {
     var newPicture = pictureTemplate.cloneNode(true);
@@ -15,12 +15,18 @@
     return newPicture;
   };
 
+  var loadedData = [];
+
   var successHandler = function (data) {
-    window.pictures = data;
-    for (var i = 0; i < window.pictures.length; i++) {
-      fragment.appendChild(getPicture(window.pictures[i]));
+    loadedData = data;
+    for (var i = 0; i < loadedData.length; i++) {
+      fragment.appendChild(getPicture(loadedData[i]));
     }
     pictureElement.appendChild(fragment);
+  };
+
+  var getLoadedData = function () {
+    return loadedData;
   };
 
   var errorHandler = function (errorMessage) {
@@ -36,8 +42,9 @@
 
   backend.load(successHandler, errorHandler);
 
-  window.picture = {
+  window.pictures = {
     fragment: fragment,
+    getLoadedData: getLoadedData,
     element: pictureElement,
   };
 })();

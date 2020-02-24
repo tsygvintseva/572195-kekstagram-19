@@ -2,8 +2,9 @@
 
 (function () {
   var CONST = window.constants;
-  var picture = window.picture;
+  var pictures = window.pictures;
   var form = window.form;
+  var utils = window.utils;
 
   var bigPicture = document.querySelector('.big-picture');
   var bigPictureComment = bigPicture.querySelector('.social__comment');
@@ -37,10 +38,10 @@
   // Создаю комментарии под фотографией
   var createComments = function (photo) {
     for (var i = 0; i < photo.comments.length; i++) {
-      picture.fragment.appendChild(renderComment(photo.comments[i]));
+      pictures.fragment.appendChild(renderComment(photo.comments[i]));
     }
     bigPictureComments.textContent = '';
-    bigPictureComments.appendChild(picture.fragment);
+    bigPictureComments.appendChild(pictures.fragment);
   };
 
   // Открытие изображения
@@ -71,10 +72,11 @@
   };
 
   var showBigPhoto = function (src) {
-    for (var i = 0; i < window.pictures.length; i++) {
-      if (src === window.pictures[i].url) {
+    var picture = pictures.getLoadedData();
+    for (var i = 0; i < picture.length; i++) {
+      if (src === picture[i].url) {
         openPopupPreview();
-        renderBigPicture(window.pictures[i]);
+        renderBigPicture(picture[i]);
       }
     }
   };
@@ -86,8 +88,8 @@
     }
   };
 
-  picture.element.addEventListener('click', onPictureClick);
-  picture.element.addEventListener('keydown', onPictureEnterPress);
+  pictures.element.addEventListener('click', onPictureClick);
+  pictures.element.addEventListener('keydown', onPictureEnterPress);
   closeBigPictureButton.addEventListener('click', function () {
     closePopupPreview();
   });

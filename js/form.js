@@ -2,8 +2,11 @@
 
 (function () {
   var CONST = window.constants;
+  var backend = window.backend;
 
   var body = document.querySelector('body');
+  var main = document.querySelector('main');
+  var fragment = document.createDocumentFragment();
   var upload = document.querySelector('#upload-file');
   var editionFileOpen = document.querySelector('.img-upload__overlay');
   var editionFileClose = editionFileOpen.querySelector('#upload-cancel');
@@ -25,7 +28,6 @@
     document.addEventListener('keydown', onPopupEscPress);
     imgUploadEffectLevel.classList.add('hidden');
     resetEffectsValue();
-    upload.value = '';
   };
 
   // Закрытие формы редактирования
@@ -51,6 +53,78 @@
     closePopup();
   });
 
+  var imgUploadForm = document.querySelector('.img-upload__form');
+
+  imgUploadForm.addEventListener('submit', function (evt) {
+    backend.upload(new FormData(imgUploadForm), uploadSuccessHandler, uploadErrorHandler);
+    evt.preventDefault();
+  });
+
+  var successTemplate = document.querySelector('#success').content.querySelector('.success');
+
+  var uploadSuccessHandler = function () {
+    var newSuccess = successTemplate.cloneNode(true);
+    fragment.appendChild(newSuccess);
+    main.appendChild(fragment);
+    document.addEventListener('keydown', onSuccessModalEscPress);
+    document.addEventListener('click', onSuccessModalClick);
+    upload.value = '';
+    closePopup();
+  };
+
+  var closeSuccessModal = function () {
+    var success = document.querySelector('.success');
+    document.removeEventListener('keydown', onSuccessModalEscPress);
+    document.removeEventListener('click', onSuccessModalClick);
+    success.parentNode.removeChild(success);
+  };
+
+  var onSuccessModalEscPress = function (evt) {
+    if (evt.key === CONST.ESC_KEY) {
+      closeSuccessModal();
+    }
+  };
+
+  var onSuccessModalClick = function (evt) {
+    if (!evt.target.classList.contains('success__inner')
+    && !evt.target.classList.contains('success__title')) {
+      closeSuccessModal();
+    }
+  };
+
+  var errorTemplate = document.querySelector('#error').content.querySelector('.error');
+
+  var uploadErrorHandler = function (errorMessage) {
+    var newError = errorTemplate.cloneNode(true);
+    newError.querySelector('.error__title').textContent = errorMessage;
+    fragment.appendChild(newError);
+    main.appendChild(fragment);
+    document.addEventListener('keydown', onErrorModalEscPress);
+    document.addEventListener('click', onErrorModalClick);
+    upload.value = '';
+    closePopup();
+  };
+
+  var closeErrorModal = function () {
+    var error = document.querySelector('.error');
+    document.removeEventListener('keydown', onErrorModalEscPress);
+    document.removeEventListener('click', onErrorModalClick);
+    error.parentNode.removeChild(error);
+  };
+
+  var onErrorModalEscPress = function (evt) {
+    if (evt.key === CONST.ESC_KEY) {
+      closeErrorModal();
+    }
+  };
+
+  var onErrorModalClick = function (evt) {
+    if (!evt.target.classList.contains('error__inner')
+     && !evt.target.classList.contains('error__title')) {
+      closeErrorModal();
+    }
+  };
+
   var resetEffectsValue = function () {
     effectLevelPin.style.left = CONST.DEFAULT_EFFECT_PIN;
     effectLevelDepth.style.width = CONST.DEFAULT_EFFECT_DEPTH;
@@ -61,6 +135,7 @@
 
   window.form = {
     body: body,
+    fragment: fragment,
     imgUploadPreview: imgUploadPreview,
     editionFileOpen: editionFileOpen,
     effectLevelPin: effectLevelPin,
@@ -73,4 +148,5 @@
     scaleControlBigger: scaleControlBigger,
     scaleControlValue: scaleControlValue,
   };
+
 })();

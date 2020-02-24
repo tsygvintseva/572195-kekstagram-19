@@ -13,6 +13,10 @@
   var effectLevelLine = editionFileOpen.querySelector('.effect-level__line');
   var imgUploadEffectLevel = editionFileOpen.querySelector('.img-upload__effect-level');
   var effectLevelDepth = editionFileOpen.querySelector('.effect-level__depth');
+  var imgUploadScale = document.querySelector('.img-upload__scale');
+  var scaleControlSmaller = imgUploadScale.querySelector('.scale__control--smaller');
+  var scaleControlBigger = imgUploadScale.querySelector('.scale__control--bigger');
+  var scaleControlValue = imgUploadScale.querySelector('.scale__control--value');
 
   // Открытие формы редактирования
   var openPopup = function () {
@@ -52,6 +56,7 @@
     effectLevelDepth.style.width = CONST.DEFAULT_EFFECT_DEPTH;
     imgUploadPreview.style.filter = '';
     imgUploadPreview.style.transform = '';
+    scaleControlValue.value = CONST.SCALE.DEFAULT + '%';
   };
 
   window.form = {
@@ -64,5 +69,8 @@
     effectLevelLine: effectLevelLine,
     effectLevelDepth: effectLevelDepth,
     resetEffectsValue: resetEffectsValue,
+    scaleControlSmaller: scaleControlSmaller,
+    scaleControlBigger: scaleControlBigger,
+    scaleControlValue: scaleControlValue,
   };
 })();

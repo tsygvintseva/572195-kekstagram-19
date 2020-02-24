@@ -4,7 +4,6 @@
   var CONST = window.constants;
   var pictures = window.pictures;
   var form = window.form;
-  var utils = window.utils;
 
   var bigPicture = document.querySelector('.big-picture');
   var bigPictureComment = bigPicture.querySelector('.social__comment');

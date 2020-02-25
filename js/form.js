@@ -34,6 +34,7 @@
   var closePopup = function () {
     editionFileOpen.classList.add('hidden');
     body.classList.remove('modal-open');
+    upload.value = '';
     document.removeEventListener('keydown', onPopupEscPress);
   };
 
@@ -68,7 +69,6 @@
     main.appendChild(fragment);
     document.addEventListener('keydown', onSuccessModalEscPress);
     document.addEventListener('click', onSuccessModalClick);
-    upload.value = '';
     closePopup();
   };
 
@@ -101,7 +101,6 @@
     main.appendChild(fragment);
     document.addEventListener('keydown', onErrorModalEscPress);
     document.addEventListener('click', onErrorModalClick);
-    upload.value = '';
     closePopup();
   };
 

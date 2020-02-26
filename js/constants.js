@@ -25,6 +25,7 @@
     STEP: 25
   };
   var URL_LOAD = 'https://js.dump.academy/kekstagram/data';
+  var URL_UPLOAD = 'https://js.dump.academy/kekstagram';
   var TIMEOUT_IN_MS = 10000;
   var SUCCESS_STATUS_CODE = 200;
 
@@ -41,6 +42,7 @@
     HASHTAGS_MAX: HASHTAGS_MAX,
     SCALE: SCALE,
     URL_LOAD: URL_LOAD,
+    URL_UPLOAD: URL_UPLOAD,
     TIMEOUT_IN_MS: TIMEOUT_IN_MS,
     SUCCESS_STATUS_CODE: SUCCESS_STATUS_CODE,
   };

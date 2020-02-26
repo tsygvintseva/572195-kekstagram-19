@@ -2,7 +2,7 @@
 
 (function () {
   var backend = window.backend;
-  var fragment = document.createDocumentFragment();
+  var form = window.form;
   var pictureElement = document.querySelector('.pictures');
   var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   document.querySelector('.pictures__title').classList.remove('visually-hidden');
@@ -17,19 +17,19 @@
 
   var loadedData = [];
 
-  var successHandler = function (data) {
+  var loadSuccessHandler = function (data) {
     loadedData = data;
     for (var i = 0; i < loadedData.length; i++) {
-      fragment.appendChild(getPicture(loadedData[i]));
+      form.fragment.appendChild(getPicture(loadedData[i]));
     }
-    pictureElement.appendChild(fragment);
+    pictureElement.appendChild(form.fragment);
   };
 
   var getLoadedData = function () {
     return loadedData;
   };
 
-  var errorHandler = function (errorMessage) {
+  var loadErrorHandler = function (errorMessage) {
     var node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
     node.style.position = 'absolute';
@@ -40,10 +40,9 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  backend.load(successHandler, errorHandler);
+  backend.load(loadSuccessHandler, loadErrorHandler);
 
   window.pictures = {
-    fragment: fragment,
     getLoadedData: getLoadedData,
     element: pictureElement,
   };

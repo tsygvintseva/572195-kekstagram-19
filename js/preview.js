@@ -37,10 +37,10 @@
   // Создаю комментарии под фотографией
   var createComments = function (photo) {
     for (var i = 0; i < photo.comments.length; i++) {
-      pictures.fragment.appendChild(renderComment(photo.comments[i]));
+      form.fragment.appendChild(renderComment(photo.comments[i]));
     }
     bigPictureComments.textContent = '';
-    bigPictureComments.appendChild(pictures.fragment);
+    bigPictureComments.appendChild(form.fragment);
   };
 
   // Открытие изображения

@@ -3,9 +3,11 @@
 (function () {
   var backend = window.backend;
   var form = window.form;
+  var CONST = window.constants;
   var pictureElement = document.querySelector('.pictures');
   var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   document.querySelector('.pictures__title').classList.remove('visually-hidden');
+  var imgFilters = document.querySelector('.img-filters');
 
   var getPicture = function (picture) {
     var newPicture = pictureTemplate.cloneNode(true);
@@ -17,7 +19,7 @@
 
   var loadedData = [];
 
-  var loadSuccessHandler = function (data) {
+  var renderDefault = function (data) {
     loadedData = data;
     for (var i = 0; i < loadedData.length; i++) {
       form.fragment.appendChild(getPicture(loadedData[i]));
@@ -27,6 +29,18 @@
 
   var getLoadedData = function () {
     return loadedData;
+  };
+
+  var arrayPictures = [];
+
+  var loadSuccessHandler = function (picture) {
+    arrayPictures = picture;
+    renderDefault(arrayPictures, CONST.COUNT_IMG);
+    imgFilters.classList.remove('img-filters--inactive');
+  };
+
+  var getArrayPictures = function () {
+    return arrayPictures;
   };
 
   var loadErrorHandler = function (errorMessage) {
@@ -45,5 +59,8 @@
   window.pictures = {
     getLoadedData: getLoadedData,
     element: pictureElement,
+    getPicture: getPicture,
+    getArrayPictures: getArrayPictures,
+    renderDefault: renderDefault,
   };
 })();

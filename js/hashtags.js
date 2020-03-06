@@ -9,10 +9,10 @@
 
   var validateHashtags = function (value) {
     var hashtags = value.toLowerCase().trim().split(/\s+/);
+    if (hashtags[0] === '') {
+      return '';
+    }
     for (var i = 0; i < hashtags.length; i++) {
-      if (hashtags[i] === '') {
-        return '';
-      }
       if (hashtags[i][0] !== '#') {
         return 'Хэш-тег должен начинаться с #';
       }

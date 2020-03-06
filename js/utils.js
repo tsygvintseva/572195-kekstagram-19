@@ -1,12 +1,35 @@
 'use strict';
 
 (function () {
-  var getRandomValue = function (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+
+  var shuffleArray = function (array) {
+    var copy = array.slice();
+    for (var i = copy.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      copy[i] = copy[j];
+      copy[j] = temp;
+    }
+    return copy;
+  };
+
+  var sortObjectsArrayByField = function (array, field) {
+    var clone = array.slice();
+    clone.sort(function (first, second) {
+      if (first[field] < second[field]) {
+        return 1;
+      } else if (first[field] > second[field]) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    return clone;
   };
 
   window.utils = {
-    getRandomValue: getRandomValue,
+    shuffleArray: shuffleArray,
+    sortObjectsArrayByField: sortObjectsArrayByField,
   };
 
 })();

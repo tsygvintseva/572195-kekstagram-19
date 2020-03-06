@@ -9,7 +9,7 @@
 
   var validateHashtags = function (value) {
     var hashtags = value.toLowerCase().trim().split(/\s+/);
-    if (hashtags[i] === '') {
+    if (hashtags[0] === '') {
       return '';
     }
     for (var i = 0; i < hashtags.length; i++) {

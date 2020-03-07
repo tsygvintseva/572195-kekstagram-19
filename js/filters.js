@@ -29,7 +29,7 @@
     filterRandom.classList.add('img-filters__button--active');
     filterDiscussed.classList.remove('img-filters__button--active');
     pictures.render(
-        utils.shuffleArray(pictures.getLoadedData()).slice(0, CONST.COUNT_IMG)
+        utils.shuffleArray(pictures.getLoadedData()).slice(0, CONST.COUNT_IMG_RANDOM)
     );
   }));
 

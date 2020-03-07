@@ -43,6 +43,57 @@
     bigPictureComments.appendChild(form.fragment);
   };
 
+  var commentsLoader = bigPicture.querySelector('.comments-loader');
+  var bigPictureCommentCount = bigPicture.querySelector('.social__comment-count');
+  var commentsCountTotal = bigPictureCommentCount.querySelector('.comments-count');
+  var arrayComments = [];
+  var countCommentsRender;
+
+  var getComments = function (comments) {
+    form.fragment = document.createDocumentFragment();
+    var fragmentCommentsCount = document.createDocumentFragment();
+
+    var countComments = comments.length > CONST.COUNT_COMMENTS ? CONST.COUNT_COMMENTS : comments.length;
+    countCommentsRender = countCommentsRender + countComments;
+
+    for (var i = 0; i < countComments; i++) {
+      form.fragment.appendChild(renderComment(comments.shift()));
+    }
+
+    bigPictureCommentCount.textContent = '';
+
+    fragmentCommentsCount.textContent = countCommentsRender + ' из ';
+    fragmentCommentsCount.appendChild(commentsCountTotal);
+    fragmentCommentsCount.innerHtml = fragmentCommentsCount.innerHtml + ' комментариев';
+
+    bigPictureCommentCount.appendChild(fragmentCommentsCount);
+    bigPictureComments.appendChild(form.fragment);
+
+    if (!comments.length) {
+      commentsLoader.classList.add('hidden');
+    }
+  };
+
+  var onLoadMoreComments = function () {
+    getComments(arrayComments);
+  };
+
+  var showComments = function (comments) {
+    arrayComments = comments.slice();
+    countCommentsRender = 0;
+    bigPictureComments.textContent = '';
+    commentsCountTotal.textContent = comments.length + ' комментариев';
+
+    if (comments.length > CONST.COUNT_COMMENTS) {
+      commentsLoader.classList.remove('hidden');
+      bigPictureCommentCount.classList.remove('hidden');
+    }
+
+    getComments(arrayComments);
+  };
+
+  commentsLoader.addEventListener('click', onLoadMoreComments);
+
   // Открытие изображения
   var openPopupPreview = function () {
     bigPicture.classList.remove('hidden');
@@ -76,6 +127,7 @@
       if (src === picture[i].url) {
         openPopupPreview();
         renderBigPicture(picture[i]);
+        showComments(picture[i].comments);
       }
     }
   };

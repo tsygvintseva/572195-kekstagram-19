@@ -68,6 +68,10 @@
 
     bigPictureCommentCount.appendChild(fragmentCommentsCount);
     bigPictureComments.appendChild(form.fragment);
+
+    if (!comments.length) {
+      commentsLoader.classList.add('hidden');
+    }
   };
 
   var onLoadMoreComments = function () {
@@ -83,8 +87,6 @@
     if (comments.length > CONST.COUNT_COMMENTS) {
       commentsLoader.classList.remove('hidden');
       bigPictureCommentCount.classList.remove('hidden');
-    } else {
-      commentsLoader.classList.add('hidden');
     }
 
     getComments(arrayComments);

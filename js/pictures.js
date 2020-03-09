@@ -16,14 +16,14 @@
     return newPicture;
   };
 
-  var render = function (pictures) {
+  var renderPictures = function (pictures) {
     for (var i = 0; i < pictures.length; i++) {
       form.fragment.appendChild(getPicture(pictures[i]));
     }
     pictureElement.appendChild(form.fragment);
   };
 
-  var getLoadedData = function () {
+  var getPictures = function () {
     return loadedData;
   };
 
@@ -31,7 +31,7 @@
 
   var loadSuccessHandler = function (pictures) {
     loadedData = pictures;
-    render(loadedData);
+    renderPictures(loadedData);
     imgFilters.classList.remove('img-filters--inactive');
   };
 
@@ -49,9 +49,9 @@
   backend.load(loadSuccessHandler, loadErrorHandler);
 
   window.pictures = {
-    getLoadedData: getLoadedData,
+    getPictures: getPictures,
     element: pictureElement,
     getPicture: getPicture,
-    render: render,
+    render: renderPictures,
   };
 })();

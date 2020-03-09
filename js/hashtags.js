@@ -4,9 +4,6 @@
   var CONST = window.constants;
   var form = window.form;
 
-  // Валидация хэш-тегов
-  var textHashtags = form.editionFileOpen.querySelector('.text__hashtags');
-
   var validateHashtags = function (value) {
     var hashtags = value.toLowerCase().trim().split(/\s+/);
     if (hashtags[0] === '') {
@@ -41,8 +38,8 @@
     return '';
   };
 
-  textHashtags.addEventListener('input', function (evt) {
-    textHashtags.setCustomValidity(validateHashtags(evt.target.value));
+  form.textHashtags.addEventListener('input', function (evt) {
+    form.textHashtags.setCustomValidity(validateHashtags(evt.target.value));
   });
 
 })();

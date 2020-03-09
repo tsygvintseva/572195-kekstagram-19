@@ -4,8 +4,6 @@
   var CONST = window.constants;
   var form = window.form;
 
-  // Масшабирование
-
   var changeScaleDown = function () {
     var scaleValue = parseInt(form.scaleControlValue.value, 10);
     var newValue = scaleValue - CONST.SCALE.STEP >= CONST.SCALE.MIN

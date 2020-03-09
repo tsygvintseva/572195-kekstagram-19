@@ -27,7 +27,7 @@
   var onEffectChange = function (evt) {
     currentEffect = evt.target.value;
     form.resetEffectsValue();
-    form.imgUploadPreview.style.filter = selectEffect(1);
+    form.imgUploadPreview.style.filter = selectEffect(CONST.DEFAULT_EFFECT_VALUE);
   };
 
   var getSaturationValue = function (evt) {
@@ -35,7 +35,7 @@
   };
 
   var onSaturationChange = function (evt) {
-    var value = getSaturationValue(evt, form.effectLevelLine);
+    var value = getSaturationValue(evt);
     form.imgUploadPreview.style.filter = selectEffect(value);
   };
 

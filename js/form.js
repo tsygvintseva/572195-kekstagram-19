@@ -20,8 +20,9 @@
   var scaleControlSmaller = imgUploadScale.querySelector('.scale__control--smaller');
   var scaleControlBigger = imgUploadScale.querySelector('.scale__control--bigger');
   var scaleControlValue = imgUploadScale.querySelector('.scale__control--value');
+  var textHashtags = editionFileOpen.querySelector('.text__hashtags');
+  var textDescription = editionFileOpen.querySelector('.text__description');
 
-  // Открытие формы редактирования
   var openPopup = function () {
     editionFileOpen.classList.remove('hidden');
     body.classList.add('modal-open');
@@ -30,12 +31,12 @@
     resetEffectsValue();
   };
 
-  // Закрытие формы редактирования
   var closePopup = function () {
     editionFileOpen.classList.add('hidden');
     body.classList.remove('modal-open');
     upload.value = '';
     document.removeEventListener('keydown', onPopupEscPress);
+    imgUploadForm.reset();
   };
 
   var onPopupEscPress = function (evt) {
@@ -130,6 +131,8 @@
     imgUploadPreview.style.filter = '';
     imgUploadPreview.style.transform = '';
     scaleControlValue.value = CONST.SCALE.DEFAULT + '%';
+    textHashtags.value = '';
+    textDescription.value = '';
   };
 
   window.form = {
@@ -146,6 +149,7 @@
     scaleControlSmaller: scaleControlSmaller,
     scaleControlBigger: scaleControlBigger,
     scaleControlValue: scaleControlValue,
+    textHashtags: textHashtags,
   };
 
 })();

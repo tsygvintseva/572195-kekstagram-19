@@ -9,7 +9,7 @@
   var filterRandom = document.querySelector('#filter-random');
   var filterDiscussed = document.querySelector('#filter-discussed');
 
-  filterDefault.addEventListener('click', window.debounce(function () {
+  filterDefault.addEventListener('click', utils.debounce(function () {
     document.querySelectorAll('.picture').forEach(function (item) {
 
       item.remove();
@@ -17,10 +17,10 @@
     filterDefault.classList.add('img-filters__button--active');
     filterRandom.classList.remove('img-filters__button--active');
     filterDiscussed.classList.remove('img-filters__button--active');
-    pictures.render(pictures.getLoadedData(), CONST.COUNT_IMG);
+    pictures.render(pictures.getPictures(), CONST.COUNT_IMG);
   }));
 
-  filterRandom.addEventListener('click', window.debounce(function () {
+  filterRandom.addEventListener('click', utils.debounce(function () {
     document.querySelectorAll('.picture').forEach(function (item) {
 
       item.remove();
@@ -29,11 +29,11 @@
     filterRandom.classList.add('img-filters__button--active');
     filterDiscussed.classList.remove('img-filters__button--active');
     pictures.render(
-        utils.shuffleArray(pictures.getLoadedData()).slice(0, CONST.COUNT_IMG_RANDOM)
+        utils.shuffleArray(pictures.getPictures()).slice(0, CONST.COUNT_IMG_RANDOM)
     );
   }));
 
-  filterDiscussed.addEventListener('click', window.debounce(function () {
+  filterDiscussed.addEventListener('click', utils.debounce(function () {
     document.querySelectorAll('.picture').forEach(function (item) {
 
       item.remove();
@@ -42,7 +42,7 @@
     filterRandom.classList.remove('img-filters__button--active');
     filterDiscussed.classList.add('img-filters__button--active');
     pictures.render(
-        utils.sortObjectsArrayByField(pictures.getLoadedData(), 'comments')
+        utils.sortObjectsArrayByField(pictures.getPictures(), CONST.SORT_PHOTOS_BY_COMMENTS)
     );
   }));
 

@@ -5,7 +5,6 @@
   var form = window.form;
   var pictureElement = document.querySelector('.pictures');
   var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-  document.querySelector('.pictures__title').classList.remove('visually-hidden');
   var imgFilters = document.querySelector('.img-filters');
 
   var getPicture = function (picture) {
@@ -16,14 +15,14 @@
     return newPicture;
   };
 
-  var render = function (pictures) {
-    for (var i = 0; i < pictures.length; i++) {
-      form.fragment.appendChild(getPicture(pictures[i]));
-    }
+  var renderPictures = function (pictures) {
+    pictures.forEach(function (item) {
+      form.fragment.appendChild(getPicture(item));
+    });
     pictureElement.appendChild(form.fragment);
   };
 
-  var getLoadedData = function () {
+  var getPictures = function () {
     return loadedData;
   };
 
@@ -31,7 +30,7 @@
 
   var loadSuccessHandler = function (pictures) {
     loadedData = pictures;
-    render(loadedData);
+    renderPictures(loadedData);
     imgFilters.classList.remove('img-filters--inactive');
   };
 
@@ -49,9 +48,9 @@
   backend.load(loadSuccessHandler, loadErrorHandler);
 
   window.pictures = {
-    getLoadedData: getLoadedData,
+    getPictures: getPictures,
     element: pictureElement,
     getPicture: getPicture,
-    render: render,
+    render: renderPictures,
   };
 })();

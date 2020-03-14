@@ -4,7 +4,7 @@
   var CONST = window.constants;
   var form = window.form;
 
-  var changeScaleDown = function () {
+  var onScaleDownClick = function () {
     var scaleValue = parseInt(form.scaleControlValue.value, 10);
     var newValue = scaleValue - CONST.SCALE.STEP >= CONST.SCALE.MIN
       ? scaleValue - CONST.SCALE.STEP
@@ -13,7 +13,7 @@
     form.scaleControlValue.value = (newValue) + '%';
   };
 
-  var changeScaleUp = function () {
+  var onScaleUpClick = function () {
     var scaleValue = parseInt(form.scaleControlValue.value, 10);
     var newValue = scaleValue + CONST.SCALE.STEP <= CONST.SCALE.MAX
       ? scaleValue + CONST.SCALE.STEP
@@ -22,7 +22,7 @@
     form.scaleControlValue.value = (newValue) + '%';
   };
 
-  form.scaleControlSmaller.addEventListener('click', changeScaleDown);
-  form.scaleControlBigger.addEventListener('click', changeScaleUp);
+  form.scaleControlSmaller.addEventListener('click', onScaleDownClick);
+  form.scaleControlBigger.addEventListener('click', onScaleUpClick);
 
 })();

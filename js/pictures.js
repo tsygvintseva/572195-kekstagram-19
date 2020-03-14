@@ -5,7 +5,6 @@
   var form = window.form;
   var pictureElement = document.querySelector('.pictures');
   var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-  document.querySelector('.pictures__title').classList.remove('visually-hidden');
   var imgFilters = document.querySelector('.img-filters');
 
   var getPicture = function (picture) {
@@ -17,9 +16,9 @@
   };
 
   var renderPictures = function (pictures) {
-    for (var i = 0; i < pictures.length; i++) {
-      form.fragment.appendChild(getPicture(pictures[i]));
-    }
+    pictures.forEach(function (item) {
+      form.fragment.appendChild(getPicture(item));
+    });
     pictureElement.appendChild(form.fragment);
   };
 

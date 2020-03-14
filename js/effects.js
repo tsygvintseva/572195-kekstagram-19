@@ -39,9 +39,9 @@
     form.imgUploadPreview.style.filter = selectEffect(value);
   };
 
-  for (var j = 0; j < form.effectsRadio.length; j++) {
-    form.effectsRadio[j].addEventListener('change', onEffectChange);
-  }
+  form.effectsRadio.forEach(function (item) {
+    item.addEventListener('change', onEffectChange);
+  });
 
   form.effectLevelPin.addEventListener('mousedown', function (evt) {
     var startCoordsX = evt.clientX;

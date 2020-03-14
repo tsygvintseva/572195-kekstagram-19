@@ -36,6 +36,7 @@
     body.classList.remove('modal-open');
     upload.value = '';
     document.removeEventListener('keydown', onPopupEscPress);
+    imgUploadForm.reset();
   };
 
   var onPopupEscPress = function (evt) {

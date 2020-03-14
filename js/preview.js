@@ -32,9 +32,9 @@
   };
 
   var createComments = function (photo) {
-    for (var i = 0; i < photo.comments.length; i++) {
-      form.fragment.appendChild(renderComment(photo.comments[i]));
-    }
+    photo.comments.forEach(function (item) {
+      form.fragment.appendChild(renderComment(item));
+    });
     bigPictureComments.textContent = '';
     bigPictureComments.appendChild(form.fragment);
   };
@@ -110,7 +110,7 @@
 
   var onPictureEnterPress = function (evt) {
     if (evt.key === CONST.ENTER_KEY) {
-      var activePicture = evt.target.children[0].attributes.src.value;
+      var activePicture = evt.target.children[0].src.value;
       showBigPhoto(activePicture);
     }
   };
